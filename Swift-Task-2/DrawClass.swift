@@ -28,18 +28,21 @@ class DrawClass: UIView {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor.whiteColor()
-        }
-    
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-        lastPoint = touches.anyObject()?.locationInView(self)
     }
     
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
-        var newPoint = touches.anyObject()?.locationInView(self)
-        lines.append(Line(start: lastPoint, end: newPoint!, width: lineWidth, red: lineRed, blue: lineBlue, green: lineGreen))
-        lastPoint = newPoint
-        
-        self.setNeedsDisplay()
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+            lastPoint = touch.locationInView(self)
+        }
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let touch = touches.first as? UITouch {
+            let newPoint = touch.locationInView(self)
+            lines.append(Line(start: lastPoint, end: newPoint, width: lineWidth, red: lineRed, blue: lineBlue, green: lineGreen))
+            lastPoint = newPoint
+            self.setNeedsDisplay()
+        }
     }
     
     override func drawRect(rect: CGRect) {

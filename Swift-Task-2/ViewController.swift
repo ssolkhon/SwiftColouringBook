@@ -53,10 +53,10 @@ class ViewController: UIViewController {
         
         // save image to DB
         // Set up the application delegate and context
-        var appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         // add a new user
-        var newImage = NSEntityDescription.insertNewObjectForEntityForName("SavedImages", inManagedObjectContext: context) as NSManagedObject
+        var newImage = NSEntityDescription.insertNewObjectForEntityForName("SavedImages", inManagedObjectContext: context) as! NSManagedObject
         // set the values
         newImage.setValue(data, forKey: "image")
         // save the record to the DB

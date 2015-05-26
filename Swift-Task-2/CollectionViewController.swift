@@ -55,7 +55,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as CollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CollectionViewCell
     
         // Configure the cell
         cell.imageView.image = imgs[indexPath.row]
@@ -66,8 +66,8 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // when a user selects an image they will be taken to the image editor
         if segue.identifier == "imageEditor" {
-            let viewController = segue.destinationViewController as ViewController
-            let index = self.collectionView?.indexPathForCell(sender as CollectionViewCell)
+            let viewController = segue.destinationViewController as! ViewController
+            let index = self.collectionView?.indexPathForCell(sender as! CollectionViewCell)
             
             if let i = index?.row {
                 viewController.selectedImg = imgs[i]
@@ -89,7 +89,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         self.imgs.append(UIImage(named: "pony")!)
         self.imgs.append(UIImage(named: "hello-kitty")!)
         // add the custom images from the DB
-        var appDel:AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         var context:NSManagedObjectContext = appDel.managedObjectContext!
         // Make the request to the DB
         var request = NSFetchRequest(entityName: "SavedImages")
@@ -101,7 +101,7 @@ class CollectionViewController: UICollectionViewController, UICollectionViewData
         if res.count > 0 {
             for r in res {
                 //println(r.valueForKey("image"))
-                let decodedimage = UIImage(data: r.valueForKey("image")! as NSData)
+                let decodedimage = UIImage(data: r.valueForKey("image")! as! NSData)
                 self.imgs.append(decodedimage!)
             }
         } else {
