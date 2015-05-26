@@ -5,7 +5,7 @@ This application allows users to select an image, colour the image in, and then 
 of the images.
 
 # How to run
-This application will run via the iOS simulator using XCode 6.2.
+This application will run via the iOS simulator using XCode 6.3.2
 
 # Screenshots
 
